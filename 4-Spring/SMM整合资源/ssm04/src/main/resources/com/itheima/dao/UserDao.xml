@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.UserDao">
+    <select id="findAll" resultType="user">
+        select *
+        from U
+    </select>
+    <!--#{}=call f_yearsal(#{})-->
+    <select id="findYearSal" statementType="CALLABLE">
+        {#{yearsal,mode=OUT,jdbcType=DOUBLE} = call f_yearsal(#{empno,mode=IN,jdbcType=DOUBLE})}
+    </select>
+    <!--call p_yearsal(#{},#{})-->
+    <select id="p_findYearSal" statementType="CALLABLE">
+        {call p_yearsal(#{empno,mode=IN,jdbcType=DOUBLE}, #{yearsal,mode=OUT,jdbcType=DOUBLE})}
+    </select>
+
+</mapper>
